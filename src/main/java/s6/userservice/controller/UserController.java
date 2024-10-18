@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping
     @IsAuthenticated
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_MODERATOR"})
+    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN", "ROLE_MODERATOR"})
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
