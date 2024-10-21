@@ -52,6 +52,8 @@ jobs:
             -Dsonar.organization=s6 \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=14751f915d170dc4677405ce7195eb9c9442c2ad \
-            -Dsonar.sources=. \
+            -Dsonar.sources=src/main/java \
+            -Dsonar.tests=src/test/java \
+            -Dsonar.exclusions=src/test/java/** \
             -Dsonar.junit.reportPaths=target/surefire-reports \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
