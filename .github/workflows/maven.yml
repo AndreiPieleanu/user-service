@@ -48,8 +48,8 @@ jobs:
       - name: Run SonarCloud analysis
         run: |
           mvn verify sonar:sonar \
-            -Dsonar.projectKey=userservice \
-            -Dsonar.organization=andreipieleanu \
+            -Dsonar.projectKey=user-service \
+            -Dsonar.organization=s6 \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=14751f915d170dc4677405ce7195eb9c9442c2ad \
             -Dsonar.sources=. \
