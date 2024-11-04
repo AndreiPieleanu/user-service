@@ -2,7 +2,6 @@ package s6.userservice.servicelayer;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import s6.userservice.configuration.AccessToken;
@@ -13,6 +12,7 @@ import s6.userservice.dto.*;
 import s6.userservice.rabbitmq.RabbitMQProducer;
 import s6.userservice.requestresponse.*;
 import s6.userservice.servicelayer.customexceptions.UserNotFoundException;
+import s6.userservice.servicelayer.token.IAccessTokenEncoder;
 
 import java.util.Arrays;
 import java.util.List;

@@ -150,6 +150,41 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version> <!-- Use the latest version -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/s6/userservice/servicelayer/*</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/s6/userservice/configuration/**/*</exclude>
+                                <exclude>**/s6/userservice/controller/**/*</exclude>
+                                <exclude>**/s6/userservice/datalayer/**/*</exclude>
+                                <exclude>**/s6/userservice/dto/**/*</exclude>
+                                <exclude>**/s6/userservice/rabbitmq/**/*</exclude>
+                                <exclude>**/s6/userservice/requestresponse/**/*</exclude>
+                                <exclude>**/s6/userservice/UserServiceApplication.java</exclude>
+                                <exclude>**/s6/userservice/servicelayer/customexceptions/**/*</exclude>
+                                <exclude>**/s6/userservice/servicelayer/token/**/*</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

@@ -16,7 +16,7 @@ import s6.userservice.requestresponse.FindUserRequest;
 import s6.userservice.requestresponse.FindUserResponse;
 import s6.userservice.requestresponse.UpdateUserRequest;
 import s6.userservice.requestresponse.UpdateUserResponse;
-import s6.userservice.servicelayer.IAccessTokenEncoder;
+import s6.userservice.servicelayer.token.IAccessTokenEncoder;
 import s6.userservice.servicelayer.UserService;
 import s6.userservice.servicelayer.customexceptions.UserNotFoundException;
 

@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import s6.userservice.configuration.AccessToken;
-import s6.userservice.servicelayer.IAccessTokenDecoder;
+import s6.userservice.servicelayer.token.IAccessTokenDecoder;
 import s6.userservice.servicelayer.customexceptions.InvalidAccessTokenException;
 
 import java.io.IOException;
