@@ -48,11 +48,10 @@ jobs:
       - name: Run SonarCloud analysis
         run: |
           mvn verify sonar:sonar \
-            -Dsonar.projectKey=userservice \
-            -Dsonar.organization=s6.userservice \
+            -Dsonar.projectKey=AndreiPieleanu_user-service \
+            -Dsonar.organization=andreipieleanu \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=14751f915d170dc4677405ce7195eb9c9442c2ad \
-            -Dsonar.sources=. \
-            -Dsonar.exclusions=src/test/java/** \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.junit.reportPaths=target/surefire-reports \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        working-directory: ./user-service
