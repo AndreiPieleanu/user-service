@@ -54,4 +54,3 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.junit.reportPaths=target/surefire-reports \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-        working-directory: ./user-service
