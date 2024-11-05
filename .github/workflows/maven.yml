@@ -63,6 +63,8 @@ jobs:
       - name: Set up Docker
         run: |
           docker --version
+      - name: Build with Maven (again, if necessary)
+        run: mvn -B package --file pom.xml
       - name: Build Docker image
         run: |
           docker build -t user-service:latest .
