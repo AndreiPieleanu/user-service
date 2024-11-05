@@ -47,7 +47,7 @@ jobs:
           cache: maven
       - name: Run SonarCloud analysis
         run: |
-          mvn verify sonar:sonar \
+          mvn clean verify sonar:sonar \
             -Dsonar.projectKey=AndreiPieleanu_user-service \
             -Dsonar.organization=andreipieleanu \
             -Dsonar.host.url=https://sonarcloud.io \
