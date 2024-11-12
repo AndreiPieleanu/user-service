@@ -17,6 +17,7 @@ import s6.userservice.servicelayer.token.IAccessTokenEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @AllArgsConstructor
@@ -40,15 +41,15 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         User createdUser = userDal.save(user);
-        UserCreatedEvent userCreatedEvent = UserCreatedEvent
-                .builder()
-                .id(createdUser.getId())
-                .email(createdUser.getEmail())
-                .firstName(createdUser.getFirstName())
-                .lastName(createdUser.getLastName())
-                .build();
-        rabbitMQProducer.publishUserCreatedEvent(userCreatedEvent);
-        System.out.println("Message published! User: " + createdUser);
+        CompletableFuture.runAsync(() -> {
+            UserCreatedEvent userCreatedEvent = UserCreatedEvent.builder()
+                    .id(createdUser.getId())
+                    .email(createdUser.getEmail())
+                    .firstName(createdUser.getFirstName())
+                    .lastName(createdUser.getLastName())
+                    .build();
+            rabbitMQProducer.publishUserCreatedEvent(userCreatedEvent);
+        });
         return createdUser;
     }
     public List<User> getUsers(){

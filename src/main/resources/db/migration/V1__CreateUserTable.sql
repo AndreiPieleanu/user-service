@@ -13,3 +13,4 @@ CREATE TABLE kwex_users
     website varchar(100) not null,
     PRIMARY KEY (id)
 );
+CREATE INDEX idx_email ON kwex_users (email);
