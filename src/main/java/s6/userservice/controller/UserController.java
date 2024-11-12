@@ -67,7 +67,7 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     @IsAuthenticated
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_MODERATOR"})
+    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN", "ROLE_MODERATOR"})
     public ResponseEntity<Void> deleteUser(@PathVariable Integer userId) {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
