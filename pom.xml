@@ -168,7 +168,7 @@
                         </goals>
                         <configuration>
                             <includes>
-                                <include>**/s6/userservice/servicelayer/UserService.java</include>
+                                <include>**/s6/userservice/servicelayer/*</include>
                             </includes>
                             <excludes>
                                 <exclude>**/s6/userservice/configuration/**/*</exclude>
