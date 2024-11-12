@@ -27,8 +27,8 @@ public class AccessTokenEncoderDecoder implements IAccessTokenEncoder, IAccessTo
     @Override
     public AccessToken decode(String accessTokenEncoded) {
         try {
-            var jwt = Jwts.parserBuilder().setSigningKey(key).build().parse(accessTokenEncoded);
-            Claims claims = (Claims) jwt.getBody();
+            var jwt = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessTokenEncoded);
+            Claims claims = jwt.getBody();
 
             String role = claims.get("role", String.class);
 
