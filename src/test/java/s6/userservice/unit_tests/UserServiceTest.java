@@ -67,7 +67,6 @@ public class UserServiceTest {
 
         Mockito.when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
         Mockito.when(userDal.save(Mockito.any(User.class))).thenReturn(addedUser);
-        Mockito.doNothing().when(rabbitMQProducer).publishUserCreatedEvent(any(UserCreatedEvent.class));
 
         User createdUser = userService.createUser(user);
 
