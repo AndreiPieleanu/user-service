@@ -63,7 +63,6 @@ public class UserService {
 
     public LoginResponse login(LoginRequest loginRequest) {
         Optional<User> user = userDal.findByEmail(loginRequest.getEmail());
-        List<User> abc = userDal.findAll();
         if(user.isEmpty()) {
             throw new UserNotFoundException();
         }
