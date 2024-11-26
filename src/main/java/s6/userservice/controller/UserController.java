@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import s6.userservice.Constants;
 import s6.userservice.configuration.security.isauthenticated.IsAuthenticated;
 import s6.userservice.datalayer.entities.Role;
 import s6.userservice.datalayer.entities.User;
@@ -19,7 +18,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = Constants.LOCALHOST_FRONTEND_URL)
 public class UserController {
     private final UserService userService;
 
