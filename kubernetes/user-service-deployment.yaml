@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: microservices-network
   annotations:
     kompose.cmd: C:\Users\Andrei\go\bin\kompose.exe convert -f docker-compose.yml
     kompose.version: 1.34.0 (HEAD)
