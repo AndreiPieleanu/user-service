@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - image: trainingtexas/user-service:latest
-          name: user-service-container
+          name: user-service
           ports:
             - containerPort: 8085
               protocol: TCP
