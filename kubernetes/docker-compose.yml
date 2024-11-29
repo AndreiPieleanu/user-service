@@ -1,8 +1,23 @@
-version: "3.9"
+version: '3.8'
 services:
   user-service:
-    build:
-      context: kubernetes
-      dockerfile: ../Dockerfile
+    image: trainingtexas/user-service:latest
+    container_name: user-service
     ports:
       - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/user-service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - user-service-mysql
+
+  user-service-mysql:
+    image: mysql:8.0
+    container_name: user-service-mysql
+    environment:
+      MYSQL_DATABASE: user-service
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3307:3307"
