@@ -11,6 +11,6 @@ spec:
   ports:
     - name: "3307"
       port: 3307
-      targetPort: 3306
+      targetPort: 3307
   selector:
     io.kompose.service: user-service-mysql

@@ -22,15 +22,11 @@ spec:
     spec:
       containers:
         - env:
-            - name: MYSQL_DATABASE
-              value: user-service
-            - name: MYSQL_PASSWORD
+            - name: MYSQL_ROOT_PASSWORD
               value: admin
-            - name: MYSQL_USER
-              value: root
           image: mysql:8.0
           name: user-service-mysql
           ports:
-            - containerPort: 3306
+            - containerPort: 3307
               protocol: TCP
       restartPolicy: Always
