@@ -21,6 +21,14 @@ spec:
         io.kompose.service: user-service
     spec:
       containers:
+        - name: user-service-mysql
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
         - env:
             - name: SPRING_DATASOURCE_PASSWORD
               value: app_password

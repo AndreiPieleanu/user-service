@@ -21,6 +21,14 @@ spec:
         io.kompose.service: user-service-mysql
     spec:
       containers:
+        - name: user-service-mysql
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
         - env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
