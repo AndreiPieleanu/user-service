@@ -32,7 +32,7 @@ public class User {
     private String password;
 
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(name = "createdAt", updatable = false)
     private Date createdAt;
 
     @UpdateTimestamp
