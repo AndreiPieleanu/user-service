@@ -9,8 +9,8 @@ metadata:
   name: user-service-mysql
 spec:
   ports:
-    - name: "3307"
-      port: 3307
-      targetPort: 3307
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
   selector:
     io.kompose.service: user-service-mysql

@@ -31,7 +31,7 @@ spec:
           image: mysql:8.0
           name: user-service-mysql
           ports:
-            - containerPort: 3307
+            - containerPort: 3306
               protocol: TCP
           volumeMounts:
             - name: mysql-data
