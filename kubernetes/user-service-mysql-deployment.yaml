@@ -26,6 +26,8 @@ spec:
               value: admin
             - name: MYSQL_DATABASE
               value: user_service
+            - name: MYSQL_ROOT_HOST
+              value: "%"
           image: mysql:8.0
           name: user-service-mysql
           ports:
@@ -34,9 +36,8 @@ spec:
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
-            - name: mysql-init-scripts
-              mountPath: /docker-entrypoint-initdb.d
       restartPolicy: Always
       volumes:
         - name: mysql-data
-          emptyDir: { } # Use Persistent Volume for production
+          persistentVolumeClaim:
+            claimName: mysql-pvc
