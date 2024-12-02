@@ -29,4 +29,23 @@ spec:
           ports:
             - containerPort: 3307
               protocol: TCP
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: mysql-init-scripts
+              mountPath: /docker-entrypoint-initdb.d
       restartPolicy: Always
+      volumes:
+        - name: mysql-data
+          emptyDir: { } # Use Persistent Volume for production
+        - name: mysql-init-scripts
+          configMap:
+            name: user-service-mysql-init
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-mysql-init
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS user_service;
