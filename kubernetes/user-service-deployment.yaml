@@ -25,7 +25,7 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: admin
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://user-service-mysql:3307/user_service
+              value: mysql://user-service-mysql:3307/user_service
             - name: SPRING_DATASOURCE_USERNAME
               value: root
           image: trainingtexas/user-service:latest
