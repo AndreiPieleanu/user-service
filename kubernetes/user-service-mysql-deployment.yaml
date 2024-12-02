@@ -24,6 +24,8 @@ spec:
         - env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
+            - name: MYSQL_DATABASE
+              value: user_service
           image: mysql:8.0
           name: user-service-mysql
           ports:
@@ -38,14 +40,3 @@ spec:
       volumes:
         - name: mysql-data
           emptyDir: { } # Use Persistent Volume for production
-        - name: mysql-init-scripts
-          configMap:
-            name: user-service-mysql-init
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: user-service-mysql-init
-data:
-  init.sql: |
-    CREATE DATABASE IF NOT EXISTS user_service;
