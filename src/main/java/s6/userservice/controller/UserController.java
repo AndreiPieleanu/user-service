@@ -58,7 +58,7 @@ public class UserController {
     }
     @PutMapping("roles/{userId}")
     @IsAuthenticated
-    @RolesAllowed({"ROLE_ADMIN"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_MODERATOR"})
     public ResponseEntity<UpdateRoleResponse> updateUserRole(@PathVariable(name =
             "userId")int userId, @RequestBody UpdateRoleRequest request){
         request.setId(userId);

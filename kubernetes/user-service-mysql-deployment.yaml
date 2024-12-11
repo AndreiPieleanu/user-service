@@ -22,30 +22,28 @@ spec:
     spec:
       containers:
         - name: user-service-mysql
+          image: mysql:8.0
           resources:
             requests:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "250m"
             limits:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: "500m"
-        - env:
+          env:
             - name: MYSQL_ROOT_PASSWORD
               value: admin
             - name: MYSQL_DATABASE
               value: user_service
             - name: MYSQL_ROOT_HOST
               value: "%"
-          image: mysql:8.0
-          name: user-service-mysql
           ports:
             - containerPort: 3306
               protocol: TCP
           volumeMounts:
-            - name: mysql-data
+            - name: mysql-data-user
               mountPath: /var/lib/mysql
-      restartPolicy: Always
       volumes:
-        - name: mysql-data
+        - name: mysql-data-user
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: mysql-pvc-user
