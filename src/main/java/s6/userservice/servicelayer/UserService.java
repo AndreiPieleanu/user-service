@@ -11,6 +11,7 @@ import s6.userservice.datalayer.entities.User;
 import s6.userservice.dto.*;
 import s6.userservice.rabbitmq.RabbitMQProducer;
 import s6.userservice.requestresponse.*;
+import s6.userservice.servicelayer.customexceptions.SagaException;
 import s6.userservice.servicelayer.customexceptions.UserNotFoundException;
 import s6.userservice.servicelayer.token.IAccessTokenEncoder;
 
@@ -102,28 +103,46 @@ public class UserService {
         return new FindUserResponse(foundEntity.get());
     }
 
-    @Transactional
     public UpdateUserResponse updateUser(UpdateUserRequest request) {
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        try{
+            String encodedPassword = passwordEncoder.encode(request.getPassword());
 
-        User userToUpdate = User.builder()
-                .id(request.getUserId())
-                .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .password(encodedPassword)
-                .role(request.getRole())
-                .bio(request.getBio())
-                .location(request.getLocation())
-                .website(request.getWebsite())
-                .build();
+            User userToUpdate = User.builder()
+                    .id(request.getUserId())
+                    .email(request.getEmail())
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .password(encodedPassword)
+                    .role(request.getRole())
+                    .bio(request.getBio())
+                    .location(request.getLocation())
+                    .website(request.getWebsite())
+                    .build();
 
-        if(userDal.findById(request.getUserId()).isEmpty()){
-            throw new UserNotFoundException();
+            if(userDal.findById(request.getUserId()).isEmpty()){
+                throw new UserNotFoundException();
+            }
+            userDal.updateUser(userToUpdate);
+            UserUpdatedEvent event = UserUpdatedEvent
+                    .builder()
+                    .id(request.getUserId())
+                    .email(request.getEmail())
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .build();
+            rabbitMQProducer.publishUserUpdatedEvent(event);
+            return new UpdateUserResponse(request.getUserId());
+        } catch (Exception e){
+            rollbackUpdate(request.getUserId());
+            throw new SagaException("Saga failed and rolled back", e);
         }
-        userDal.updateUser(userToUpdate);
-        return new UpdateUserResponse(request.getUserId());
     }
+
+    private void rollbackUpdate(int userId) {
+        User previousUser = userDal.getReferenceById(userId);
+        userDal.save(previousUser);
+    }
+
     public UpdateRoleResponse updateUserRole(UpdateRoleRequest request){
         User user = User.builder().id(request.getId()).role(request.getRole()).build();
         userDal.updateUserRole(user);
