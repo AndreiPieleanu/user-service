@@ -132,7 +132,11 @@ public class UserService {
                     .build();
             rabbitMQProducer.publishUserUpdatedEvent(event);
             return new UpdateUserResponse(request.getUserId());
-        } catch (Exception e){
+        }
+        catch (UserNotFoundException e){
+            throw e;
+        }
+        catch (Exception e){
             rollbackUpdate(request.getUserId());
             throw new SagaException("Saga failed and rolled back", e);
         }
